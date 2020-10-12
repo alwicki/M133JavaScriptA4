@@ -1,0 +1,61 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS only -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<form>
+    <section class="container">
+    <div class="row">
+    <h2>Preis berechnen</h2>
+    </div>
+    <div class="row">
+        <label class="col" for="screw">Wieviele Schrauben?:</label>
+        <input class="col" autofocus="true" id="screw" type="number"  min="0"/>
+    </div>
+    <div class="row">
+        <label class="col" for="screwNut">Wieviele Muttern?:</label>
+        <input class="col" id="screwNut" type="number" min="0"/>
+    </div>
+    <div class="row">
+        <label class="col" for="grommet">Unterlegsscheiben?:</label>
+        <input class="col" id="grommet" type="number" min="0"/>
+    </div>
+    <div class="row">
+    <button class="col btn btn-primary" type="button" id="btnSend">Absenden</button>
+    <button class="col btn btn-secondary" type="reset" id="btnReset">Formular löschen</button>
+</div>
+<div class="row">
+<h1 class="col" id="price"></h1>
+</div>    
+</section>
+</form>
+
+</body>
+<script>
+document.querySelector("#btnSend").addEventListener("click", ()=>{
+    screw = document.querySelector("#screw");
+    screwNut = document.querySelector("#screwNut");
+    grommet = document.querySelector("#grommet");
+    price = document.querySelector("#price");
+   
+    priceTotal=(screw.value ? screw.value*0.2 : 0)+(screwNut.value ? screwNut.value*0.1 : 0)+(grommet.value ? grommet.value*0.05 : 0);
+    price.textContent = roundUp(priceTotal);
+});
+document.querySelector("#btnReset").addEventListener("click", ()=>{
+    price = document.querySelector("#price");
+    price.textContent = null;
+});
+
+
+ function roundUp(num) {
+  precision = Math.pow(10, 3)
+  return (Math.ceil(num * precision) / precision).toFixed(2);
+}
+
+</script>
+</html>
